@@ -1,0 +1,35 @@
+<h2 class="mb-3">Modifie ton commentaire</h2>
+
+<div class="card mb-3">
+  <div class="card-body">
+  
+    <h6 class="card-subtitle mb-2">
+      <a href="<%=user_path(id: @comment.user)%>">
+      <%= @comment.user.first_name %> <%= @comment.user.last_name %> 
+      </a>
+      de
+      <a href="<%=city_path(id: @comment.user.city_id)%>">
+        <%= @comment.user.city.name %>
+      </a>
+    </h6>
+
+
+    <%= form_for @comment do |f| %>
+
+        <div class="form-group">
+            <%= f.text_field :content, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Modifier le commentaire</button>
+        </div>
+
+        <a href="<%=comment_path(@comment.id)%>" data-confirm="Êtes-vous sur de vouloir supprimer le commentaire ?" data-method="delete">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+        </a>
+
+    <% end %>
+
+    
+  </div>
+</div>

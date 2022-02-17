@@ -1,0 +1,16 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+        📨&nbsp;&nbsp;&nbsp;
+      <%= @user.email %>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🎂&nbsp;&nbsp;&nbsp;
+      <%= @user.age %> ans
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🌆&nbsp;&nbsp;&nbsp;
+      <a href="<%=city_path(id: @user.city_id)%>">
+        <%=@user.city.name%>
+      </a>
+    </h6>
+    <p class="card-text"><%= @user.description %></p>
+  </div>
+</div>

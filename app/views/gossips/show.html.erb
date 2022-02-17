@@ -1,0 +1,68 @@
+<div class="card mb-3">
+  <div class="card-body">
+  
+    <h6 class="card-subtitle mb-2">
+      <a href="<%=user_path(id: @gossip.user)%>">
+      <%= @gossip.user.first_name %> 
+      <%= @gossip.user.last_name %>
+      </a>
+      de
+      <a href="<%=city_path(id: @gossip.user.city_id)%>">
+        <%= @gossip.user.city.name %>
+      </a>
+
+    </h6>
+
+    <h5 class="card-title"><%= @gossip.title %></h5>
+
+    <p class="card-text"><%= @gossip.content %></p>
+
+    <a href = "<%=edit_gossip_path(params[:id])%>">
+      <button type="button" class="btn btn-dark">Editer</button>
+    </a>
+
+    <a href="<%=gossip_path(@gossip.id)%>" data-confirm="Êtes-vous sur de vouloir supprimer le gossip ?" data-method="delete">
+      <button type="button" class="btn btn-danger">Supprimer</button>
+    </a>
+    
+  </div>
+  
+</div>
+
+
+
+<%= form_for @comment, :html => {:class => 'mt-5 mb-5',} do |f| %>
+
+  <h5>Ajouter un commentaire</h5>
+
+  <div class="form-group">
+    <%= f.text_field :content , class: 'form-control' , placeholder: "blablabla"%>
+  </div>
+
+  <%= f.hidden_field :gossip_id, :value => params[:id] %>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary form-control">Créer un commentaire</button>
+  </div>
+<% end %>
+<hr>
+
+
+
+
+
+<% @gossip.comments.order('created_at DESC').each do |comment|%>
+  <div class="card mb-3 border-0" style="background-color:#F0F1F3">
+    <div class="card-body">
+      <a href="<%=user_path(id: comment.user)%>">
+        <p class="card-text"><%= comment.user.first_name %> <%= comment.user.last_name %></p>
+      </a>
+      <p class="card-text"><small class="text-muted"><%= time_ago_in_words(comment.created_at)%> ago</small></p>
+      <p class="card-text"><%= comment.content %></p>
+
+      <a href = "<%=edit_gossip_comment_path(params[:id], comment.id)%>">
+        <button type="submit" class="btn btn-outline-primary">Éditer le commentaire</button>
+      </a>
+    </div>
+  </div>
+<% end %>

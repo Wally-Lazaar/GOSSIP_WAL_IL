@@ -1,0 +1,32 @@
+<a href="<%=new_gossip_path%>" 
+  class="btn btn-success btn-block btn-lg mb-3" 
+  role="button" 
+  aria-disabled="true">
+  Créer un nouveau potin
+</a>
+
+<% @gossips.each do |gossip|%>
+  <div class="card mb-3">
+    <div class="card-body">
+
+      <h5 class="card-title"><%= link_to gossip.user.first_name, user_path(id: gossip.user)%></h5>
+      <p class="card-text"><small class="text-muted"><%= time_ago_in_words(gossip.created_at)%> ago.</small></p>
+
+      <p class="card-text"><%= gossip.title %></p>
+
+      <a href="<%=gossip_path(gossip.id)%>" class="btn btn-primary">Voir le gossip</a>
+      
+      <p class="card-text mt-2">
+        <% if gossip.comments.count == 1 %>
+          <%= gossip.comments.count %> commentaire
+        <%elsif gossip.comments.count == 0%>
+          Aucun commentaire
+        <%else%>
+          <%= gossip.comments.count %> commentaires
+        <%end%>
+      </p>
+
+    </div>
+  </div>
+
+<% end %>
